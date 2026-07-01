@@ -1,4 +1,5 @@
 import { CameraView, useCameraPermissions } from "expo-camera";
+import { router } from "expo-router";
 import { useRef, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
@@ -9,10 +10,10 @@ export default function CameraScreen() {
   // Camera reference
   const cameraRef = useRef<CameraView | null>(null);
 
-  // Store the captured photo URI
+  // Store the photo URI
   const [photo, setPhoto] = useState<string | null>(null);
 
-  // Capture photo
+  // Take a picture
   async function takePicture() {
     if (!cameraRef.current) return;
 
@@ -24,17 +25,25 @@ export default function CameraScreen() {
       console.log("Photo URI:", result.uri);
 
       setPhoto(result.uri);
+
+      // Navigate to Preview Screen
+      router.push({
+        pathname: "/previewScreen",
+        params: {
+          photoUri: result.uri,
+        },
+      });
     } catch (error) {
       console.log("Error taking picture:", error);
     }
   }
 
-  // Permission is still loading
+  // Loading permission
   if (!permission) {
     return <View style={styles.container} />;
   }
 
-  // Permission not granted
+  // Permission denied
   if (!permission.granted) {
     return (
       <View style={styles.permissionContainer}>
@@ -52,7 +61,7 @@ export default function CameraScreen() {
     );
   }
 
-  // Permission granted
+  // Camera Screen
   return (
     <View style={styles.container}>
       <CameraView ref={cameraRef} style={styles.camera} facing="back" />
