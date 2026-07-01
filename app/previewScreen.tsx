@@ -58,35 +58,35 @@ export default function PreviewScreen() {
       )}
 
       {/* BUTTONS */}
+      <View style={styles.analysisRow}>
+        <TouchableOpacity
+          style={[styles.analysisButton, styles.academicButton]}
+          onPress={() => handleAnalyze("academic")}
+        >
+          <Text style={styles.buttonText}>Academic</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.analysisButton, styles.safetyButton]}
+          onPress={() => handleAnalyze("safety")}
+        >
+          <Text style={styles.buttonText}>Safety</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.analysisButton, styles.inventoryButton]}
+          onPress={() => handleAnalyze("inventory")}
+        >
+          <Text style={styles.buttonText}>Inventory</Text>
+        </TouchableOpacity>
+      </View>
+
       <View style={styles.actionRow}>
         <TouchableOpacity
           style={styles.retakeButton}
           onPress={() => router.back()}
         >
           <Text style={styles.buttonText}>Retake</Text>
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.analysisRow}>
-        <TouchableOpacity
-          style={styles.analysisButton}
-          onPress={() => handleAnalyze("academic")}
-        >
-          <Text style={styles.buttonText}>Academic Analysis</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.analysisButton}
-          onPress={() => handleAnalyze("safety")}
-        >
-          <Text style={styles.buttonText}>Safety Analysis</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.analysisButton}
-          onPress={() => handleAnalyze("inventory")}
-        >
-          <Text style={styles.buttonText}>Inventory Analysis</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -107,34 +107,60 @@ const styles = StyleSheet.create({
   actionRow: {
     flexDirection: "row",
     justifyContent: "center",
-    padding: 20,
+    paddingVertical: 20,
   },
 
   analysisRow: {
-    flexDirection: "column",
-    gap: 12,
-    paddingHorizontal: 20,
-    paddingBottom: 20,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    gap: 10,
+    paddingHorizontal: 16,
+    paddingVertical: 16,
   },
 
   retakeButton: {
-    backgroundColor: "#5A6472",
+    backgroundColor: "#252632",
     paddingVertical: 14,
-    paddingHorizontal: 30,
-    borderRadius: 8,
+    paddingHorizontal: 36,
+    borderRadius: 18,
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.08)",
+    shadowColor: "#000",
+    shadowOpacity: 0.15,
+    shadowRadius: 12,
+    shadowOffset: { width: 0, height: 8 },
   },
 
   analysisButton: {
-    backgroundColor: "#4E7CFF",
-    paddingVertical: 14,
-    paddingHorizontal: 24,
-    borderRadius: 10,
+    flex: 1,
+    paddingVertical: 16,
+    marginHorizontal: 4,
+    borderRadius: 22,
     alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#000",
+    shadowOpacity: 0.18,
+    shadowRadius: 14,
+    shadowOffset: { width: 0, height: 10 },
+  },
+
+  academicButton: {
+    backgroundColor: "#6C63FF",
+  },
+
+  safetyButton: {
+    backgroundColor: "#FF5E7A",
+  },
+
+  inventoryButton: {
+    backgroundColor: "#1DD6AA",
   },
 
   buttonText: {
     color: "#fff",
-    fontWeight: "bold",
-    fontSize: 16,
+    fontWeight: "800",
+    fontSize: 14,
+    letterSpacing: 0.5,
+    textTransform: "uppercase",
   },
 });
