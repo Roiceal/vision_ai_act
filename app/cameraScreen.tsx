@@ -19,7 +19,7 @@ export default function CameraScreen() {
 
     try {
       const result = await cameraRef.current.takePictureAsync({
-        quality: 0.7,
+        quality: 0.3,
       });
 
       console.log("Photo URI:", result.uri);
